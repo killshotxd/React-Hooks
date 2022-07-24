@@ -5,6 +5,7 @@ import React, { Fragment, useEffect, useState } from "react";
 
 function UseEffectHooks() {
   const [counter, setCounter] = useState(0);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     console.log("Use effect in Action but only once");
@@ -19,6 +20,7 @@ function UseEffectHooks() {
       );
 
       const data = await response.json();
+      if (data && data.length) setData(data);
       console.log(data);
     }
 
@@ -29,6 +31,12 @@ function UseEffectHooks() {
     <Fragment>
       <button onClick={() => setCounter(counter + 1)}>Click Me </button>
       {counter}
+
+      <ul>
+        {data.map((item) => (
+          <li>{item.title}</li>
+        ))}
+      </ul>
     </Fragment>
   );
 }
